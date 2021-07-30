@@ -60,13 +60,13 @@ To use this plugin, add `flutter_headset_detector` as a [dependency in your pubs
 
 ## Screenshot
 * There are no connected headphones:
-![Alt text](screenshot/both_not_connected.jpeg?raw=true "No connected")
+![Alt text](screenshot/both_not_connected.jpg?raw=true "No connected")
 
 * There are wired connected headphones:
-![Alt text](screenshot/wired_connected.jpeg?raw=true "Wired connected")
+![Alt text](screenshot/wired_connected.jpg?raw=true "Wired connected")
 
 * There are Bluetooth connected headphones:
-![Alt text](screenshot/wireless_connected.jpeg?raw=true "Bluetooth connected")
+![Alt text](screenshot/wireless_connected.jpg?raw=true "Bluetooth connected")
 
 * All types are connected:
-![Alt text](screenshot/all_connected.jpeg?raw=true "All connected")
+![Alt text](screenshot/all_connected.jpg?raw=true "All connected")
