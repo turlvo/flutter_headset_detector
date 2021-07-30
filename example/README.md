@@ -1,6 +1,6 @@
-# headset_connection_event_example
+# flutter_headset_detector_example
 
-Demonstrates how to use the headset_connection_event plugin.
+Demonstrates how to use the flutter_headset_detector plugin.
 
 ## Getting Started
 

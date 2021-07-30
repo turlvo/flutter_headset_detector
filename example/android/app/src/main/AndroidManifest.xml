@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="flutter.moum.headset_connection_event_example">
+    package="flutter.moum.flutter_headset_detector_example">
    <application
-        android:label="headset_connection_event_example"
+        android:label="flutter_headset_detector_example"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

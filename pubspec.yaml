@@ -1,11 +1,11 @@
-name: headset_connection_event
+name: flutter_headset_detector
 description: Flutter Plugin for headset events. Detect headset is plugged and unplugged. Get current headset state.
-version: 2.1.0
-author: songyiYu<songyi0207@gmail.com>, yenoss<cpg0504@gmail.com>, FlutterMoum Group<fluttermoum@gmail.com>, Blake Helms (helmsb), Rafael Delos Santos (themobilecoder)
-homepage: https://github.com/themobilecoder/headset_connection_event
+version: 1.0.0
+author: songyiYu<songyi0207@gmail.com>, yenoss<cpg0504@gmail.com>, FlutterMoum Group<fluttermoum@gmail.com>, Blake Helms (helmsb), Rafael Delos Santos (themobilecoder), KuKu <turlvo@gmail.com>
+homepage: https://github.com/turlvo/flutter_headset_detector
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
   flutter: ">=1.20.0"
 
 dependencies:
@@ -15,13 +15,13 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  mockito: ^5.0.0
+  mockito: ^4.1.4
 
 flutter:
   plugin:
     platforms:
       android:
-        package: flutter.moum.headset_connection_event
-        pluginClass: HeadsetConnectionEventPlugin
+        package: flutter.moum.flutter_headset_detector
+        pluginClass: FlutterHeadsetDetectorPlugin
       ios:
-        pluginClass: HeadsetConnectionEventPlugin
+        pluginClass: FlutterHeadsetDetectorPlugin

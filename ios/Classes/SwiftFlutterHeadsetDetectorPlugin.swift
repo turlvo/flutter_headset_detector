@@ -3,12 +3,12 @@ import UIKit
 import AVFoundation
 
 
-public class SwiftHeadsetConnectionEventPlugin: NSObject, FlutterPlugin {
+public class SwiftFlutterHeadsetDetectorPlugin: NSObject, FlutterPlugin {
     var channel : FlutterMethodChannel?
     
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let channel = FlutterMethodChannel(name: "flutter.moum/headset_connection_event", binaryMessenger: registrar.messenger())
-        let instance = SwiftHeadsetConnectionEventPlugin()
+        let channel = FlutterMethodChannel(name: "flutter.moum/flutter_headset_detector", binaryMessenger: registrar.messenger())
+        let instance = SwiftFlutterHeadsetDetectorPlugin()
         registrar.addMethodCallDelegate(instance, channel: channel)
         
         instance.channel = channel
@@ -39,26 +39,53 @@ public class SwiftHeadsetConnectionEventPlugin: NSObject, FlutterPlugin {
                   let reason = AVAudioSession.RouteChangeReason(rawValue:reasonValue) else {
                 return
             }
+            
             switch reason {
             case .newDeviceAvailable:
-                self.channel!.invokeMethod("connect",arguments: "true")
+                let session = AVAudioSession.sharedInstance()
+                let headphonesConnected = self.hasHeadphones(in: session.currentRoute)
+
+                if (headphonesConnected) {
+                    self.channel!.invokeMethod("wired_connected", arguments: "true")
+                } else {
+                    self.channel!.invokeMethod("wireless_connected", arguments: "true")
+                }
             case .oldDeviceUnavailable:
-                self.channel!.invokeMethod("disconnect",arguments: "true")
+                if let previousRoute =
+                    userInfo[AVAudioSessionRouteChangePreviousRouteKey] as? AVAudioSessionRouteDescription {
+                    let headphonesConnected = self.hasHeadphones(in: previousRoute)
+                    if (headphonesConnected) {
+                        self.channel!.invokeMethod("wired_disconnected", arguments: "true")
+                    } else {
+                        self.channel!.invokeMethod("wireless_disconnected", arguments: "true")
+                    }
+                }
             default: ()
             }
         }
     }
-    
-    func HeadsetIsConnect() -> Int  {
+
+    func hasHeadphones(in routeDescription: AVAudioSessionRouteDescription) -> Bool {
+        // Filter the outputs to only those with a port type of headphones.
+        return !routeDescription.outputs.filter({$0.portType == .headphones}).isEmpty
+    }
+
+    func HeadsetIsConnect() -> [Int : Bool]  {
         let currentRoute = AVAudioSession.sharedInstance().currentRoute
+
+        var state : [Int : Bool] = [0: false, 1: false]
         for output in currentRoute.outputs {
             let portType = output.portType
-            if portType == AVAudioSession.Port.headphones || portType == AVAudioSession.Port.bluetoothA2DP || portType == AVAudioSession.Port.bluetoothHFP {
-                return 1
-            } else {
-                return 0
+            switch portType {
+                case AVAudioSession.Port.headphones:
+                    state[0] = true
+                case AVAudioSession.Port.bluetoothA2DP:
+                    state[1] = true
+                case AVAudioSession.Port.bluetoothHFP:
+                    state[1] = true
+                default: ()
             }
         }
-        return 0
+        return state
     }
 }

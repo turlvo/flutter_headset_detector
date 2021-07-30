@@ -1,4 +1,4 @@
-package flutter.moum.headset_connection_event;
+package flutter.moum.flutter_headset_detector;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.BroadcastReceiver;
@@ -19,14 +19,13 @@ public class HeadsetBroadcastReceiver extends BroadcastReceiver {
         switch (intent.getAction()) {
             case Intent.ACTION_HEADSET_PLUG:
                 final int state = intent.getIntExtra("state", -1);
-                HeadsetConnectionEventPlugin.currentState = state;
 
                 switch (state) {
                     case 0:
-                        headsetEventListener.onHeadsetDisconnect();
+                        headsetEventListener.onWiredHeadsetDisconnect();
                         break;
                     case 1:
-                        headsetEventListener.onHeadsetConnect();
+                        headsetEventListener.onWiredHeadsetConnect();
                         break;
                 }
                 break;
@@ -35,10 +34,10 @@ public class HeadsetBroadcastReceiver extends BroadcastReceiver {
 
                 switch (connectionState) {
                     case BluetoothAdapter.STATE_CONNECTED:
-                        headsetEventListener.onHeadsetConnect();
+                        headsetEventListener.onWirelessHeadsetConnect();
                         break;
                     case BluetoothAdapter.STATE_DISCONNECTED:
-                        headsetEventListener.onHeadsetDisconnect();
+                        headsetEventListener.onWirelessHeadsetDisconnect();
                         break;
                 }
                 break;
@@ -47,27 +46,27 @@ public class HeadsetBroadcastReceiver extends BroadcastReceiver {
                 final int connectionState = intent.getExtras().getInt(BluetoothAdapter.EXTRA_STATE);
 
                 if (connectionState == BluetoothAdapter.STATE_OFF) {
-                    headsetEventListener.onHeadsetDisconnect();
+                    headsetEventListener.onWirelessHeadsetDisconnect();
                 }
                 break;
             }
             default:
                 abortBroadcast();
 
-                final KeyEvent key = intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
-                if (key.getAction() == KeyEvent.ACTION_UP) {
-                    final int keycode = key.getKeyCode();
+                // final KeyEvent key = intent.getParcelableExtra(Intent.EXTRA_KEY_EVENT);
+                // if (key.getAction() == KeyEvent.ACTION_UP) {
+                //     final int keycode = key.getKeyCode();
 
-                    switch (keycode) {
-                        case KeyEvent.KEYCODE_MEDIA_NEXT:
-                            headsetEventListener.onNextButtonPress();
-                            break;
-                        case KeyEvent.KEYCODE_MEDIA_PREVIOUS:
-                            headsetEventListener.onPrevButtonPress();
-                            break;
-                    }
-                }
-                break;
+                //     switch (keycode) {
+                //         case KeyEvent.KEYCODE_MEDIA_NEXT:
+                //             headsetEventListener.onNextButtonPress();
+                //             break;
+                //         case KeyEvent.KEYCODE_MEDIA_PREVIOUS:
+                //             headsetEventListener.onPrevButtonPress();
+                //             break;
+                //     }
+                // }
+                // break;
         }
     }
 }

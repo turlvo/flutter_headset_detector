@@ -1,4 +1,4 @@
-package flutter.moum.headset_connection_event_example;
+package flutter.moum.flutter_headset_detector_example;
 
 import io.flutter.embedding.android.FlutterActivity;
 
