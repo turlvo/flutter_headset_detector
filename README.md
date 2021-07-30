@@ -30,7 +30,7 @@ To use this plugin, add `flutter_headset_detector` as a [dependency in your pubs
     };
 
     /// if headset is plugged
-  headsetDetector.getCurrentState.then((_val){
+    headsetDetector.getCurrentState.then((_val){
       headsetState = _val;
       setState(() {
       });
