@@ -10,8 +10,9 @@ import android.media.AudioDeviceInfo;
 import android.media.AudioManager;
 import android.content.Intent;
 import android.content.IntentFilter;
-
+import android.os.Build;
 import androidx.annotation.NonNull;
+import android.util.Log;
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin;
 import io.flutter.plugin.common.MethodCall;
@@ -91,17 +92,19 @@ public class FlutterHeadsetDetectorPlugin implements FlutterPlugin, MethodCallHa
         AudioManager audioManager =
                 (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
-        AudioDeviceInfo[] audioDevices = audioManager.getDevices(AudioManager.GET_DEVICES_ALL);
+         AudioDeviceInfo[] audioDevices = audioManager.getDevices(AudioManager.GET_DEVICES_ALL);
 
-        for (AudioDeviceInfo deviceInfo : audioDevices) {
-            int deviceType = deviceInfo.getType();
-            if (deviceType == AudioDeviceInfo.TYPE_WIRED_HEADPHONES
-                    || deviceType == AudioDeviceInfo.TYPE_WIRED_HEADSET) {
-                return 1;
-            }
-        }
+         for (AudioDeviceInfo deviceInfo : audioDevices) {
+             int deviceType = deviceInfo.getType();
+             if (deviceType == AudioDeviceInfo.TYPE_WIRED_HEADPHONES
+                     || deviceType == AudioDeviceInfo.TYPE_WIRED_HEADSET
+                     || deviceType == AudioDeviceInfo.TYPE_USB_HEADSET
+                     || deviceType == AudioDeviceInfo.TYPE_USB_DEVICE) {
+                 return 1;
+             }
+         }
+         return 0;
 
-        return 0;
     }
 
     private int bluetoothHeadphonesConnectionState() {
