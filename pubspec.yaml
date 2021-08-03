@@ -1,6 +1,6 @@
 name: flutter_headset_detector
 description: Flutter Plugin for headset events. Detect headset is plugged and unplugged. Get current headset state.
-version: 1.0.0
+version: 1.1.0
 author: songyiYu<songyi0207@gmail.com>, yenoss<cpg0504@gmail.com>, FlutterMoum Group<fluttermoum@gmail.com>, Blake Helms (helmsb), Rafael Delos Santos (themobilecoder), KuKu <turlvo@gmail.com>
 homepage: https://github.com/turlvo/flutter_headset_detector
 
