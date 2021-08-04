@@ -8,8 +8,8 @@ typedef DetectPluggedCallback = Function(HeadsetChangedEvent payload);
 class MockMethodChannel extends Mock implements MethodChannel {}
 
 void main() {
-  MockMethodChannel _methodChannel;
-  HeadsetDetector _he;
+  MockMethodChannel? _methodChannel;
+  late HeadsetDetector _he;
 
   setUp(() {
     _methodChannel = MockMethodChannel();
@@ -17,7 +17,7 @@ void main() {
   });
 
   test('getCurrentState', () async {
-    when(_methodChannel.invokeMethod('getCurrentState')).thenAnswer(
+    when(_methodChannel!.invokeMethod('getCurrentState')).thenAnswer(
       (Invocation invoke) => Future.value(
         {
           0: false,
@@ -34,7 +34,7 @@ void main() {
       },
     );
 
-    when(_methodChannel.invokeMethod('getCurrentState')).thenAnswer(
+    when(_methodChannel!.invokeMethod('getCurrentState')).thenAnswer(
       (Invocation invoke) => Future.value(
         {
           0: true,
@@ -51,7 +51,7 @@ void main() {
       },
     );
 
-    when(_methodChannel.invokeMethod('getCurrentState')).thenAnswer(
+    when(_methodChannel!.invokeMethod('getCurrentState')).thenAnswer(
       (Invocation invoke) => Future.value(
         {
           0: false,
