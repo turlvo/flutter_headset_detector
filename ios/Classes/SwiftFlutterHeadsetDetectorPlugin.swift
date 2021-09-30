@@ -83,9 +83,12 @@ public class SwiftFlutterHeadsetDetectorPlugin: NSObject, FlutterPlugin {
                     state[1] = true
                 case AVAudioSession.Port.bluetoothHFP:
                     state[1] = true
+                case AVAudioSession.Port.bluetoothLE:
+                    state[1] = true
                 default: ()
             }
         }
+        
         return state
     }
 }

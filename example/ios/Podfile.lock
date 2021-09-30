@@ -1,6 +1,6 @@
 PODS:
   - Flutter (1.0.0)
-  - flutter_headset_detector (1.0.0):
+  - flutter_headset_detector (2.1.0):
     - Flutter
 
 DEPENDENCIES:
@@ -14,8 +14,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/flutter_headset_detector/ios"
 
 SPEC CHECKSUMS:
-  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
-  flutter_headset_detector: f56faf40d8454767dd6e593c9250e29162eda8b1
+  Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
+  flutter_headset_detector: 087a64f776342a1fb73d21b68c068182aa60462f
 
 PODFILE CHECKSUM: e855e5c889670ac6759fc26ac7c09b4bff66b4b0
 

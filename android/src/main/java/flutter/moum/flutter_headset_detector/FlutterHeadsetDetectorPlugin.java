@@ -26,10 +26,11 @@ import io.flutter.plugin.common.MethodChannel.Result;
 public class FlutterHeadsetDetectorPlugin implements FlutterPlugin, MethodCallHandler {
     private static Context context;
 
-
-    /// The MethodChannel that will the communication between Flutter and native Android
+    /// The MethodChannel that will the communication between Flutter and native
+    /// Android
     ///
-    /// This local reference serves to register the plugin with the Flutter Engine and unregister it
+    /// This local reference serves to register the plugin with the Flutter Engine
+    /// and unregister it
     /// when the Flutter Engine is detached from the Activity
     private MethodChannel channel;
 
@@ -89,42 +90,33 @@ public class FlutterHeadsetDetectorPlugin implements FlutterPlugin, MethodCallHa
     }
 
     private int wiredHeadphonesConnectionState() {
-        AudioManager audioManager =
-                (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
+        AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
-         AudioDeviceInfo[] audioDevices = audioManager.getDevices(AudioManager.GET_DEVICES_ALL);
+        AudioDeviceInfo[] audioDevices = audioManager.getDevices(AudioManager.GET_DEVICES_ALL);
 
-         for (AudioDeviceInfo deviceInfo : audioDevices) {
-             int deviceType = deviceInfo.getType();
-             if (deviceType == AudioDeviceInfo.TYPE_WIRED_HEADPHONES
-                     || deviceType == AudioDeviceInfo.TYPE_WIRED_HEADSET
-                     || deviceType == AudioDeviceInfo.TYPE_USB_HEADSET
-                     || deviceType == AudioDeviceInfo.TYPE_USB_DEVICE) {
-                 return 1;
-             }
-         }
-         return 0;
+        for (AudioDeviceInfo deviceInfo : audioDevices) {
+            int deviceType = deviceInfo.getType();
+            if (deviceType == AudioDeviceInfo.TYPE_WIRED_HEADPHONES || deviceType == AudioDeviceInfo.TYPE_WIRED_HEADSET
+                    || deviceType == AudioDeviceInfo.TYPE_USB_HEADSET
+                    || deviceType == AudioDeviceInfo.TYPE_USB_DEVICE) {
+                return 1;
+            }
+        }
+        return 0;
 
     }
 
     private int bluetoothHeadphonesConnectionState() {
-        BluetoothManager bluetoothManager =
-                (BluetoothManager) context.getSystemService(Context.BLUETOOTH_SERVICE);
-        BluetoothAdapter bluetoothAdapter = bluetoothManager.getAdapter();
-        final int state = bluetoothAdapter.getProfileConnectionState(BluetoothProfile.HEADSET);
+        AudioManager audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
 
-        int result;
-        switch (state) {
-            case BluetoothAdapter.STATE_CONNECTED:
-                result = 1;
-                break;
-            case BluetoothAdapter.STATE_DISCONNECTED:
-                result = 0;
-                break;
-            default:
-                result = 0;
+        AudioDeviceInfo[] audioDevices = audioManager.getDevices(AudioManager.GET_DEVICES_ALL);
+
+        for (AudioDeviceInfo deviceInfo : audioDevices) {
+            int deviceType = deviceInfo.getType();
+            if (deviceType == AudioDeviceInfo.TYPE_BLUETOOTH_A2DP || deviceType == AudioDeviceInfo.TYPE_BLUETOOTH_SCO) {
+                return 1;
+            }
         }
-
-        return result;
+        return 0;
     }
 }
