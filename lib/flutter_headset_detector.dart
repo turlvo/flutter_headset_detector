@@ -27,11 +27,11 @@ Usage: Instantiate a [HeadsetDetector] by using a factory constructor. Under the
 this constructor will always return a single instance if one has been instantiated before.
 */
 class HeadsetDetector {
-  static HeadsetDetector _instance;
+  static HeadsetDetector? _instance;
 
-  final MethodChannel _channel;
+  final MethodChannel? _channel;
 
-  DetectPluggedCallback _detectPluggedCallback;
+  DetectPluggedCallback? _detectPluggedCallback;
 
   HeadsetDetector.private(this._channel);
 
@@ -42,12 +42,12 @@ class HeadsetDetector {
       _instance = HeadsetDetector.private(methodChannel);
     }
 
-    return _instance;
+    return _instance!;
   }
 
   //Reads asynchronously the current state of the headset with type [HeadsetState]
   Future<Map<HeadsetType, HeadsetState>> get getCurrentState async {
-    final state = await _channel.invokeMethod('getCurrentState');
+    final state = await _channel!.invokeMethod('getCurrentState');
 
     return {
       HeadsetType.WIRED:
@@ -61,7 +61,7 @@ class HeadsetDetector {
   //Callback function [onPlugged] must accept a [HeadsetState] parameter.
   void setListener(DetectPluggedCallback onPlugged) {
     _detectPluggedCallback = onPlugged;
-    _channel.setMethodCallHandler(_handleMethod);
+    _channel!.setMethodCallHandler(_handleMethod);
   }
 
   Future<dynamic> _handleMethod(MethodCall call) async {

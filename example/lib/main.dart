@@ -46,7 +46,7 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
-  Color _mapStateToColor(HeadsetState state) {
+  Color _mapStateToColor(HeadsetState? state) {
     switch (state) {
       case HeadsetState.CONNECTED:
         return Colors.green;
@@ -57,7 +57,7 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
-  String _mapStateToText(HeadsetState state) {
+  String _mapStateToText(HeadsetState? state) {
     switch (state) {
       case HeadsetState.CONNECTED:
         return 'Connected';
