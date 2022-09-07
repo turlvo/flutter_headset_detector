@@ -37,8 +37,7 @@ class HeadsetDetector {
 
   factory HeadsetDetector() {
     if (_instance == null) {
-      final methodChannel =
-          const MethodChannel('flutter.moum/flutter_headset_detector');
+      final methodChannel = const MethodChannel('flutter.moum/flutter_headset_detector');
       _instance = HeadsetDetector.private(methodChannel);
     }
 
@@ -48,12 +47,10 @@ class HeadsetDetector {
   //Reads asynchronously the current state of the headset with type [HeadsetState]
   Future<Map<HeadsetType, HeadsetState>> get getCurrentState async {
     final state = await _channel!.invokeMethod('getCurrentState');
-
+    print("[AUX STATE: ]" + state.toString());
     return {
-      HeadsetType.WIRED:
-          state[0] ? HeadsetState.CONNECTED : HeadsetState.DISCONNECTED,
-      HeadsetType.WIRELESS:
-          state[1] ? HeadsetState.CONNECTED : HeadsetState.DISCONNECTED,
+      HeadsetType.WIRED: state[0] ? HeadsetState.CONNECTED : HeadsetState.DISCONNECTED,
+      HeadsetType.WIRELESS: state[1] ? HeadsetState.CONNECTED : HeadsetState.DISCONNECTED,
     };
   }
 
@@ -69,6 +66,9 @@ class HeadsetDetector {
     if (callback == null) {
       return;
     }
+
+    print("[HEADSET LOG] " + call.method);
+    print("[HEADSET LOG] " + call.arguments.toString());
 
     switch (call.method) {
       case 'wired_connected':

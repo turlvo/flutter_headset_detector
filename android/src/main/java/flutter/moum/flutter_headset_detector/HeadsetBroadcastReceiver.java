@@ -19,13 +19,14 @@ public class HeadsetBroadcastReceiver extends BroadcastReceiver {
         switch (intent.getAction()) {
             case Intent.ACTION_HEADSET_PLUG:
                 final int state = intent.getIntExtra("state", -1);
-
+                final int micState = intent.getIntExtra("microphone", -1);
+                final String name = intent.getStringExtra("name");
                 switch (state) {
                     case 0:
-                        headsetEventListener.onWiredHeadsetDisconnect();
+                        headsetEventListener.onWiredHeadsetDisconnect(name,micState);
                         break;
                     case 1:
-                        headsetEventListener.onWiredHeadsetConnect();
+                        headsetEventListener.onWiredHeadsetConnect(name,micState);
                         break;
                 }
                 break;

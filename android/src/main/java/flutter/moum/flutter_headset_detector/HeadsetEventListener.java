@@ -1,9 +1,9 @@
 package flutter.moum.flutter_headset_detector;
 
 public interface HeadsetEventListener {
-    void onWiredHeadsetConnect();
+    void onWiredHeadsetConnect(String name,int micState);
     void onWirelessHeadsetConnect();
 
-    void onWiredHeadsetDisconnect();
+    void onWiredHeadsetDisconnect(String name,int micState);
     void onWirelessHeadsetDisconnect();
 }
