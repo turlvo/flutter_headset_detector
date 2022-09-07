@@ -1,3 +1,6 @@
+# this pacakge is modified to be used in my work it's not good for public use as it now only detects headphones only (AUXs or micless hedsets)
+
+
 # Flutter Headset Detector Plugin
 
 A Flutter plugin to get a headset event.
