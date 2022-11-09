@@ -64,6 +64,11 @@ class HeadsetDetector {
     _channel!.setMethodCallHandler(_handleMethod);
   }
 
+  // Removes the callback listener if it exists
+  void removeListener() {
+    _channel!.setMethodCallHandler(null);
+  }
+
   Future<dynamic> _handleMethod(MethodCall call) async {
     final callback = _detectPluggedCallback;
     if (callback == null) {
