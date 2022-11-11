@@ -19,42 +19,45 @@ To use this plugin, add `flutter_headset_detector` as a [dependency in your pubs
 ### Example
 
 ``` dart
-    // Import package
-    import 'package:flutter_headset_detector/flutter_headset_detector.dart';
+// Import package
+import 'package:flutter_headset_detector/flutter_headset_detector.dart';
 
-    // Instantiate it
-    final headsetDetector = HeadsetDetector();
-    Map<HeadsetType, HeadsetState> headsetState = {
-      HeadsetType.WIRED: HeadsetState.DISCONNECTED,
-      HeadsetType.WIRELESS: HeadsetState.DISCONNECTED,
-    };
+// Instantiate it
+final headsetDetector = HeadsetDetector();
+Map<HeadsetType, HeadsetState> headsetState = {
+  HeadsetType.WIRED: HeadsetState.DISCONNECTED,
+  HeadsetType.WIRELESS: HeadsetState.DISCONNECTED,
+};
 
-    /// if headset is plugged
-    headsetDetector.getCurrentState.then((_val){
-      headsetState = _val;
-      setState(() {
-      });
-    });
+// if headset is plugged
+headsetDetector.getCurrentState.then((_val){
+  headsetState = _val;
+  setState(() {
+  });
+});
 
-    /// Detect the moment headset is plugged or unplugged
-    headsetDetector.setListener((_val) {
-      switch (_val) {
-        case HeadsetChangedEvent.WIRED_CONNECTED:
-          headsetState[HeadsetType.WIRED] = HeadsetState.CONNECTED;
-          break;
-        case HeadsetChangedEvent.WIRED_DISCONNECTED:
-          headsetState[HeadsetType.WIRED] = HeadsetState.DISCONNECTED;
-          break;
-        case HeadsetChangedEvent.WIRELESS_CONNECTED:
-          headsetState[HeadsetType.WIRELESS] = HeadsetState.CONNECTED;
-          break;
-        case HeadsetChangedEvent.WIRELESS_DISCONNECTED:
-          headsetState[HeadsetType.WIRELESS] = HeadsetState.DISCONNECTED;
-          break;
-      }
-      setState(() {
-      });
-    });
+// Detect the moment headset is plugged or unplugged with a Listener
+headsetDetector.setListener((_val) {
+  switch (_val) {
+    case HeadsetChangedEvent.WIRED_CONNECTED:
+      headsetState[HeadsetType.WIRED] = HeadsetState.CONNECTED;
+      break;
+    case HeadsetChangedEvent.WIRED_DISCONNECTED:
+      headsetState[HeadsetType.WIRED] = HeadsetState.DISCONNECTED;
+      break;
+    case HeadsetChangedEvent.WIRELESS_CONNECTED:
+      headsetState[HeadsetType.WIRELESS] = HeadsetState.CONNECTED;
+      break;
+    case HeadsetChangedEvent.WIRELESS_DISCONNECTED:
+      headsetState[HeadsetType.WIRELESS] = HeadsetState.DISCONNECTED;
+      break;
+  }
+  setState(() {
+  });
+});
+
+// Remove the Listener
+headsetDetector.removeListener();
 ```
 
 
