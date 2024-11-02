@@ -1,3 +1,7 @@
+## 3.0.0
+- Changed Min Dart SDK
+- Added namespace for Android
+  
 ## 2.1.0
 Migrated Android's bluetooth headset detection routine from v1.2.0
 
