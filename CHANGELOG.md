@@ -1,3 +1,6 @@
+## 3.1.0
+- Remove minSdkVersion on plugin side
+
 ## 3.0.0
 - Changed Min Dart SDK
 - Added namespace for Android
